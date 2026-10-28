@@ -349,7 +349,12 @@ open class AppLoader: NSObject {
 
   public func handleAssetDownload(withError error: UpdatesError, asset: UpdateAsset) {
     // TODO: retry. for now log an error
-    logger.error(cause: error, code: UpdatesErrorCode.assetsFailedToLoad)
+    logger.error(
+      cause: error,
+      code: UpdatesErrorCode.assetsFailedToLoad,
+      updateId: updateResponseContainingManifest?.manifestUpdateResponsePart?.updateManifest.loggingId(),
+      assetId: asset.key ?? asset.filename
+    )
     arrayLock.lock()
     assetsToLoad.remove(asset)
     erroredAssets.append(asset)
