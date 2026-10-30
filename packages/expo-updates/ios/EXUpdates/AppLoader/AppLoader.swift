@@ -351,7 +351,7 @@ open class AppLoader: NSObject {
     // TODO: retry. for now log an error
     logger.error(
       cause: error,
-      code: UpdatesErrorCode.assetsFailedToLoad,
+      code: UpdatesErrorCode.forLoadFailure(error, otherwise: .assetsFailedToLoad),
       updateId: updateResponseContainingManifest?.manifestUpdateResponsePart?.updateManifest.loggingId(),
       assetId: asset.key ?? asset.filename
     )
